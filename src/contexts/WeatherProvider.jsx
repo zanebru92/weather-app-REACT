@@ -17,6 +17,7 @@ export const WeatherProvider = ({ children }) => {
     setWeather(res.data.current);
     setLocation(res.data.location);
     setCondition(res.data.current.condition);
+    setInput("");
     setValue((prevState) => !prevState);
   };
 
