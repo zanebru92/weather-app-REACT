@@ -8,7 +8,7 @@ function App() {
 
   return (
     <main className="main-page">
-      <div className="card-container">
+      <div className="container">
         <strong className="card-title">Tempo Atual</strong>
         <p className="card-text">
           Digite uma cidade abaixo para verificar as condições climáticas.
@@ -26,8 +26,8 @@ function App() {
             Pesquisar
           </button>
         </form>
+        {value && <WeatherCard />}
       </div>
-      {value && <WeatherCard />}
     </main>
   );
 }

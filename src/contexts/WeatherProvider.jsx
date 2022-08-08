@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import { useState } from "react";
 import api from "../services/api";
 
@@ -6,17 +6,14 @@ export const WeatherContext = createContext();
 
 export const WeatherProvider = ({ children }) => {
   const [input, setInput] = useState("");
-  const [location, setLocation] = useState({});
-  const [weather, setWeather] = useState({});
+
+  const [weather, setWeather] = useState(null);
   const [value, setValue] = useState(false);
-  const [condition, setCondition] = useState({});
 
   const handleSearch = async (e) => {
     e.preventDefault();
     const res = await api.get(`${input}&lang=pt`);
-    setWeather(res.data.current);
-    setLocation(res.data.location);
-    setCondition(res.data.current.condition);
+    setWeather(res.data);
     setInput("");
     setValue((prevState) => !prevState);
   };
@@ -27,12 +24,9 @@ export const WeatherProvider = ({ children }) => {
         input,
         setInput,
         handleSearch,
-        location,
-        setLocation,
         weather,
         setWeather,
         value,
-        condition,
       }}
     >
       {children}
